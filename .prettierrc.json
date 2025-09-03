@@ -2,6 +2,7 @@
   "tabWidth": 2,
   "semi": false,
   "singleQuote": false,
+  "plugins": ["prettier-plugin-tailwindcss"],
   "overrides": [
     {
       "files": ["*.yaml", "*.yml", "*.json"],
