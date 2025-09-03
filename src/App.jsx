@@ -1,5 +1,7 @@
+import Tasks from './components/Tasks'
+
 function App() {
-  return <h1>Evandro Tomas</h1>
+  return <Tasks />
 }
 
 export default App
