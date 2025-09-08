@@ -11,20 +11,22 @@ import TimeSelect from "./Time.Select"
 
 const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
   const [time, setTime] = useState("morning")
-  const [title, setTitle] = useState()
-  const [description, setDescription] = useState()
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
 
   const nodeRef = useRef()
 
   useEffect(() => {
-    if (!isOpen) {
-      setTitle("")
-      setTime("morning")
-      setDescription("")
-    }
+    if (!isOpen) setTitle("")
+    setTime("morning")
+    setDescription("")
   }, [isOpen])
 
   const handleSaveClick = () => {
+    if (!title || !time || !description) {
+      return alert("Preencha todos os campos.")
+    }
+
     handleSubmit({
       id: v4(),
       title,
