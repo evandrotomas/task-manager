@@ -43,13 +43,13 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
     if (!description.trim()) {
       newErrors.push({
         inputName: "description",
-        message: "A descrição é obrigatório.",
+        message: "A descrição é obrigatória.",
       })
     }
-    console.log({ newErrors })
+
+    setErrors(newErrors)
 
     if (newErrors.length > 0) {
-      setErrors(newErrors)
       return
     }
 
