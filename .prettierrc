@@ -3,6 +3,7 @@
   "semi": false,
   "singleQuote": false,
   "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindFunctions": ["tv"],
   "overrides": [
     {
       "files": ["*.yaml", "*.yml", "*.json"],
