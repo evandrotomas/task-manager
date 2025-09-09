@@ -120,7 +120,7 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                     onClick={() => handleClose()}
                     size="large"
                     className="w-full"
-                    color="secundary"
+                    color="secondary"
                   >
                     Cancelar
                   </Button>
@@ -142,7 +142,7 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
   )
 }
 
-AddTaskDialog.prototypes = {
+AddTaskDialog.proptypes = {
   isOpen: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
