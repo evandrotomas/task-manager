@@ -43,17 +43,10 @@
       "status": "not_started"
     },
     {
-      "id": "f74c5fa7-51f3-43f1-9a7c-497349e89f5e",
+      "id": "476099c2-fccd-4193-ae70-b37f4a10b711",
       "title": "teste",
       "time": "morning",
       "description": "teste",
-      "status": "not_started"
-    },
-    {
-      "id": "e5e12dd5-c9c3-4a77-8f45-c7b150230614",
-      "title": "Teste 2",
-      "time": "morning",
-      "description": "Teste 2",
       "status": "not_started"
     }
   ]
