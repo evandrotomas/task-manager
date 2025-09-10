@@ -1,45 +1,59 @@
 {
   "tasks": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Estudar FSC",
       "description": "Estudar para a prova de FSC",
       "time": "morning",
       "status": "done"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Ler",
       "description": "Ler sobre programação",
       "time": "morning",
       "status": "done"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Exercício",
       "description": "Fazer caminhada",
       "time": "afternoon",
       "status": "in_progress"
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Fazer compras",
       "description": "Comprar material para fazer uma lasanha",
       "time": "afternoon",
       "status": "in_progress"
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Descançar",
       "description": "Assistir Série",
       "time": "evening",
       "status": "not_started"
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Meditar",
       "description": "Meditar por 10 minutos",
       "time": "evening",
+      "status": "not_started"
+    },
+    {
+      "id": "f74c5fa7-51f3-43f1-9a7c-497349e89f5e",
+      "title": "teste",
+      "time": "morning",
+      "description": "teste",
+      "status": "not_started"
+    },
+    {
+      "id": "e5e12dd5-c9c3-4a77-8f45-c7b150230614",
+      "title": "Teste 2",
+      "time": "morning",
+      "description": "Teste 2",
       "status": "not_started"
     }
   ]
