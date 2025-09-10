@@ -102,10 +102,7 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                   ref={titleRef}
                 />
 
-                <TimeSelect
-                  ererrorMessageror={timeError?.message}
-                  ref={timeRef}
-                />
+                <TimeSelect errorMessage={timeError?.message} ref={timeRef} />
 
                 <Input
                   id="description"
