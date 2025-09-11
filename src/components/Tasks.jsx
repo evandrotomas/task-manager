@@ -65,19 +65,13 @@ const Tasks = () => {
     setTasks(newTasks)
   }
 
-  const handleAddTaskSubmit = async (task) => {
-    // chamar api para adcionar essa tarefa
-    const response = await fetch("http://localhost:3000/tasks", {
-      method: "POST",
-      body: JSON.stringify(task),
-    })
-    if (!response.ok) {
-      return toast.error(
-        "Erro ao adicionar a tarefa. Por favor tente novamente.",
-      )
-    }
+  const onTaskSubmitSuccess = async (task) => {
     setTasks([...tasks, task])
     toast.success("Tarefa adicionada com sucesso!")
+  }
+
+  const onTaskSubmitError = () => {
+    toast.error("Erro ao adicionar tarefa. Por favor, tente novamente.")
   }
 
   return (
@@ -95,20 +89,18 @@ const Tasks = () => {
             Limpar Tarefa
             <TrashIcon />
           </Button>
-
           <Button onClick={() => setAddTaskDialogIsOpen(true)}>
             Nova Tarefa
             <AddIcon />
           </Button>
-
           <AddTaskDialog
             isOpen={addTaskDialogIsOpen}
             handleClose={() => setAddTaskDialogIsOpen(false)}
-            handleSubmit={handleAddTaskSubmit}
+            onSubmitSuccess={onTaskSubmitSuccess}
+            onSubmitError={onTaskSubmitError}
           />
         </div>
       </div>
-
       <div className="rounded-xl bg-white p-6">
         <div className="space-y-3">
           <TasksSeparator title="Manhã" icon={<SunIcon />} />
@@ -121,10 +113,8 @@ const Tasks = () => {
             />
           ))}
         </div>
-
         <div className="my-6 space-y-3">
           <TasksSeparator title="Tarde" icon={<CloudIcon />} />
-
           {afternoonTasks.map((task) => (
             <TaskItem
               key={task.id}
@@ -134,7 +124,6 @@ const Tasks = () => {
             />
           ))}
         </div>
-
         <div className="space-y-3">
           <TasksSeparator title="Noite" icon={<MoonIcon />} />
 
