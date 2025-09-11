@@ -36,13 +36,7 @@ const Tasks = () => {
   const afternoonTasks = tasks.filter((task) => task.time === "afternoon")
   const eveningTasks = tasks.filter((task) => task.time === "evening")
 
-  const handleTaskDeleteClick = async (taskId) => {
-    const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
-      method: "DELETE",
-    })
-    if (!response.ok) {
-      return toast.error("Erro ao deletar a tarefa. Por favor tente novamente")
-    }
+  const onDeleteTaskSuccess = async (taskId) => {
     const newTasks = tasks.filter((task) => task.id != taskId)
     setTasks(newTasks)
     toast.success("Tarefa removida com sucesso!")
@@ -118,13 +112,12 @@ const Tasks = () => {
       <div className="rounded-xl bg-white p-6">
         <div className="space-y-3">
           <TasksSeparator title="Manhã" icon={<SunIcon />} />
-
           {morningTasks.map((task) => (
             <TaskItem
               key={task.id}
               task={task}
               handleCheckboxClick={handleTaskCheckboxClick}
-              handleDeleteClick={handleTaskDeleteClick}
+              onDeleteSuccess={onDeleteTaskSuccess}
             />
           ))}
         </div>
@@ -137,7 +130,7 @@ const Tasks = () => {
               key={task.id}
               task={task}
               handleCheckboxClick={handleTaskCheckboxClick}
-              handleDeleteClick={handleTaskDeleteClick}
+              onDeleteSuccess={onDeleteTaskSuccess}
             />
           ))}
         </div>
@@ -150,7 +143,7 @@ const Tasks = () => {
               key={task.id}
               task={task}
               handleCheckboxClick={handleTaskCheckboxClick}
-              handleDeleteClick={handleTaskDeleteClick}
+              onDeleteSuccess={onDeleteTaskSuccess}
             />
           ))}
         </div>
