@@ -6,27 +6,6 @@
       "description": "Estudar para a prova de FSC",
       "time": "morning",
       "status": "done"
-    },
-    {
-      "id": "a0217160-b67d-4065-b8de-ba25d4e42ba4",
-      "title": "Teste",
-      "time": "morning",
-      "description": "Teste",
-      "status": "not_started"
-    },
-    {
-      "id": "f772db1a-9387-4716-8a9a-f3c7c292503c",
-      "title": "Estuda",
-      "time": "morning",
-      "description": "teste",
-      "status": "not_started"
-    },
-    {
-      "id": "950bb220-d639-4a69-9a1b-b01c9ee097f5",
-      "title": "Teste 2",
-      "time": "afternoon",
-      "description": "Teste 2",
-      "status": "not_started"
     }
   ]
 }
