@@ -9,9 +9,9 @@
     },
     {
       "id": "a0217160-b67d-4065-b8de-ba25d4e42ba4",
-      "title": "teste",
+      "title": "Teste",
       "time": "morning",
-      "description": "teste",
+      "description": "Teste",
       "status": "not_started"
     },
     {
@@ -23,9 +23,9 @@
     },
     {
       "id": "950bb220-d639-4a69-9a1b-b01c9ee097f5",
-      "title": "Teste",
+      "title": "Teste 2",
       "time": "afternoon",
-      "description": "Teste",
+      "description": "Teste 2",
       "status": "not_started"
     }
   ]
