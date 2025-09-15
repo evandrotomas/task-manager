@@ -84,6 +84,7 @@ const TaskDetailsPage = () => {
     const newTask = await response.json()
     setTask(newTask)
     setSaveIsLoading(false)
+    toast.success("Tarefa atualizada com sucesso!")
   }
 
   const handleDeleteClick = async () => {

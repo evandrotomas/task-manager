@@ -1,11 +1,11 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Estudar FSC",
-      "description": "Estudar para a prova de FSC",
-      "time": "morning",
-      "status": "done"
+      "id": "3ab34433-c251-482c-b9f2-37a18806d9a2",
+      "title": "Estudar",
+      "time": "afternoon",
+      "description": "Estudar",
+      "status": "not_started"
     }
   ]
 }
