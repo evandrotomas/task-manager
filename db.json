@@ -1,38 +1,10 @@
 {
   "tasks": [
     {
-      "id": "3ab34433-c251-482c-b9f2-37a18806d9a2",
-      "title": "Estudar",
-      "time": "afternoon",
-      "description": "Estudar",
-      "status": "not_started"
-    },
-    {
-      "id": "0d5b1143-2912-4642-b1c9-0f37fd8b9600",
-      "title": "teste5",
+      "id": "ccb08d10-f3c3-48fb-abc1-c596816c4445",
+      "title": "teste",
       "time": "morning",
-      "description": "teste5",
-      "status": "not_started"
-    },
-    {
-      "id": "246cd795-158d-4787-9615-7880db3a9ac9",
-      "title": "Test 4",
-      "time": "morning",
-      "description": "Test 4",
-      "status": "not_started"
-    },
-    {
-      "id": "66fa817e-ce3d-417d-b603-525101934ac4",
-      "title": "teste45",
-      "time": "evening",
-      "description": "teste 45",
-      "status": "not_started"
-    },
-    {
-      "id": "c1628b09-0c3a-4725-8926-0884ad2d857e",
-      "title": "teste 38",
-      "time": "morning",
-      "description": "teste 38",
+      "description": "teste",
       "status": "not_started"
     }
   ]
