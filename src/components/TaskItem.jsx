@@ -5,20 +5,13 @@ import { toast } from "sonner"
 import { CheckIcon, DetailsIcon, LoaderIcon, TrashIcon } from "../assets/icons"
 import Button from "../components/Button"
 import { useDeleteTask } from "../hooks/data/use-delete-task"
+import { useUpdateTask } from "../hooks/data/use-update-task"
 
-const TaskItem = ({ task, handleCheckboxClick }) => {
-  const { mutate: deleteTask, isPending } = useDeleteTask(task.id)
-
-  const handleDeleteClick = async () => {
-    deleteTask(undefined, {
-      onSuccess: () => {
-        toast.success("Tarefa deletada com sucesso!")
-      },
-      onError: () => {
-        toast.error("Erro ao deletar tarefa!")
-      },
-    })
-  }
+const TaskItem = ({ task }) => {
+  const { mutate: deleteTask, isPending: deleteTaskIsloading } = useDeleteTask(
+    task.id,
+  )
+  const { mutate } = useUpdateTask(task.id)
 
   const getStatusClasses = () => {
     if (task.status === "done") {
@@ -31,6 +24,46 @@ const TaskItem = ({ task, handleCheckboxClick }) => {
       return "bg-brand-dark-blue bg-opacity-10 text-brand-dark-blue"
     }
   }
+
+  const handleDeleteClick = async () => {
+    deleteTask(undefined, {
+      onSuccess: () => {
+        toast.success("Tarefa deletada com sucesso!")
+      },
+      onError: () => {
+        toast.error("Erro ao deletar tarefa!")
+      },
+    })
+  }
+
+  const getNewStatus = () => {
+    if (task.status === "not_started") {
+      return "in_progress"
+    }
+    if (task.status === "in_progress") {
+      return "done"
+    }
+    return "not_started"
+  }
+
+  const handleCheckboxClick = () => {
+    mutate(
+      {
+        status: getNewStatus(),
+      },
+      {
+        onSuccess: () =>
+          toast.success("Status da tarefa atualizado com sucesso!"),
+        onError: () =>
+          toast.error(
+            "Erro ao atualizar status da tarefa. Por favor, tente novamente",
+          ),
+      },
+    )
+  }
+
+  console.log(handleCheckboxClick)
+
   return (
     <div
       className={`flex items-center justify-between gap-2 rounded-lg bg-opacity-10 px-4 py-3 transition ${getStatusClasses()}`}
@@ -43,7 +76,7 @@ const TaskItem = ({ task, handleCheckboxClick }) => {
             type="checkbox"
             // checked={task.status === "done"}
             className="absolute h-full cursor-pointer opacity-0"
-            onChange={() => handleCheckboxClick(task.id)}
+            onChange={handleCheckboxClick}
           />
           {task.status === "done" && <CheckIcon />}
           {task.status === "in_progress" && (
@@ -56,8 +89,12 @@ const TaskItem = ({ task, handleCheckboxClick }) => {
 
       <div className="flex items-center gap-2">
         {" "}
-        <Button color="ghost" onClick={handleDeleteClick} disabled={isPending}>
-          {isPending ? (
+        <Button
+          color="ghost"
+          onClick={handleDeleteClick}
+          disabled={deleteTaskIsloading}
+        >
+          {deleteTaskIsloading ? (
             <LoaderIcon className="animate-spin" />
           ) : (
             <TrashIcon className="text-brand-text-gray" />
