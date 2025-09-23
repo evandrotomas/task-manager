@@ -5,7 +5,7 @@ import TaskItem from "../components/TaskItem"
 import { useGetTasks } from "../hooks/data/use-get-tasks"
 
 const HomePage = () => {
-  const { data: tasks = [] } = useGetTasks()
+  const { data: tasks = [] } = useGetTasks() // Garante que tasks é um array
 
   return (
     <div className="flex">
@@ -18,14 +18,14 @@ const HomePage = () => {
             <div>
               <h3 className="text-xl font-semibold">Tarefas</h3>
               <span className="text-sm text-brand-dark-gray">
-                j Resumo das tarefas disponíveis
+                Resumo das tarefas disponíveis {/* Removido o 'j' */}
               </span>
             </div>
 
             <div className="space-y-3">
-              {tasks &&
-                Array.isArray(tasks) &&
-                tasks.map((task) => <TaskItem key={task.id} task={task} />)}
+              {tasks.map((task) => (
+                <TaskItem key={task.id} task={task} />
+              ))}
             </div>
           </div>
 

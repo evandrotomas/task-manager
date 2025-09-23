@@ -15,7 +15,10 @@ export const useUpdateTask = (taskId) => {
         time: data?.time,
         status: data?.status,
       })
-      queryClient.setQueryData(taskQueryKeys.getAll(), (oldTasks) => {
+
+      // Atualiza a lista de tarefas
+      queryClient.setQueryData(taskQueryKeys.getAll(), (oldTasks = []) => {
+        // Valor padrão como array vazio
         return oldTasks.map((task) => {
           if (task.id === taskId) {
             return updatedTask
@@ -23,7 +26,13 @@ export const useUpdateTask = (taskId) => {
           return task
         })
       })
+
+      // Atualiza a tarefa específica
       queryClient.setQueryData(taskQueryKeys.getOne(taskId), updatedTask)
+    },
+    onError: (error) => {
+      console.error("Erro ao atualizar a tarefa:", error)
+      // Aqui você pode adicionar qualquer lógica adicional em caso de erro
     },
   })
 }
