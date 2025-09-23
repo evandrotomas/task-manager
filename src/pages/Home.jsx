@@ -23,9 +23,8 @@ const HomePage = () => {
             </div>
 
             <div className="space-y-3">
-              {tasks?.map((task) => (
-                <TaskItem key={task.id} task={task} />
-              ))}
+              {Array.isArray(tasks) &&
+                tasks?.map((task) => <TaskItem key={task.id} task={task} />)}
             </div>
           </div>
 
