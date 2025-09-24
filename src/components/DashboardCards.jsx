@@ -26,7 +26,7 @@ const DashboardCards = () => {
         secondaryText="Tarefas não iniciadas"
       />
       <DashboardCard
-        icon={<LoaderIcon />}
+        icon={<LoaderIcon className="animate-spin" />}
         mainText={inProgressTasks}
         secondaryText="Tarefas em andamento"
       />
