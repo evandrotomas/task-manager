@@ -7,7 +7,7 @@ import {
   ChevronRightIcon,
   LoaderIcon,
   TrashIcon,
-} from "../assets/icons/index"
+} from "../assets/icons"
 import Button from "../components/Button"
 import Input from "../components/Input"
 import Sidebar from "../components/Sidebar"
@@ -18,22 +18,19 @@ import { useUpdateTask } from "../hooks/data/use-update-task"
 
 const TaskDetailsPage = () => {
   const { taskId } = useParams()
+  const { mutate: updateTask } = useUpdateTask(taskId)
+  const { mutate: deleteTask } = useDeleteTask(taskId)
+  const { data: task } = useGetTask({
+    taskId,
+    onSuccess: (task) => reset(task),
+  })
   const navigate = useNavigate()
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     reset,
   } = useForm()
-
-  const { mutate: updateTask, isPending: updateTaskIsLoading } =
-    useUpdateTask(taskId)
-  const { mutate: deleteTask, isPending: deleteTaskIsLoading } =
-    useDeleteTask(taskId)
-  const { data: task } = useGetTask({
-    taskId,
-    onSuccess: reset,
-  })
 
   const handleBackClick = () => {
     navigate(-1)
@@ -41,8 +38,12 @@ const TaskDetailsPage = () => {
 
   const handleSaveClick = async (data) => {
     updateTask(data, {
-      onSuccess: () => toast.success("Tarefa atualizada com sucesso!"),
-      onError: () => toast.error("Ocorreu um erro ao atualizar a tarefa."),
+      onSuccess: () => {
+        toast.success("Tarefa salva com sucesso!")
+      },
+      onError: () => {
+        toast.error("Ocorreu um erro ao salvar a tarefa.")
+      },
     })
   }
 
@@ -79,13 +80,14 @@ const TaskDetailsPage = () => {
                 {task?.title}
               </span>
             </div>
+
             <h1 className="mt-2 text-xl font-semibold">{task?.title}</h1>
           </div>
 
           {/* parte da direita */}
           <Button
-            color="danger"
             className="h-fit self-end"
+            color="danger"
             onClick={handleDeleteClick}
           >
             <TrashIcon />
@@ -93,8 +95,8 @@ const TaskDetailsPage = () => {
           </Button>
         </div>
 
-        {/* dados da tarefa */}
-        <form onSubmit={handleSubmit(handleSaveClick)} action="">
+        <form onSubmit={handleSubmit(handleSaveClick)}>
+          {/* dados da tarefa */}
           <div className="space-y-6 rounded-xl bg-brand-white p-6">
             <div>
               <Input
@@ -106,7 +108,6 @@ const TaskDetailsPage = () => {
                     if (!value.trim()) {
                       return "O título não pode ser vazio."
                     }
-
                     return true
                   },
                 })}
@@ -118,14 +119,8 @@ const TaskDetailsPage = () => {
               <TimeSelect
                 {...register("time", {
                   required: "O horário é obrigatório.",
-                  validate: (value) => {
-                    if (!value.trim()) {
-                      return "O horário não pode ser vazio."
-                    }
-
-                    return true
-                  },
                 })}
+                errorMessage={errors?.time?.message}
               />
             </div>
 
@@ -137,9 +132,8 @@ const TaskDetailsPage = () => {
                   required: "A descrição é obrigatória.",
                   validate: (value) => {
                     if (!value.trim()) {
-                      return "A descrição não pode ser vazio."
+                      return "A descrição não pode ser vazia."
                     }
-
                     return true
                   },
                 })}
@@ -147,17 +141,15 @@ const TaskDetailsPage = () => {
               />
             </div>
           </div>
-
           {/* botão de salvar */}
           <div className="flex w-full justify-end gap-3">
             <Button
               size="large"
-              disabled={updateTaskIsLoading || deleteTaskIsLoading}
+              color="primary"
+              disabled={isSubmitting}
               type="submit"
             >
-              {(updateTaskIsLoading || deleteTaskIsLoading) && (
-                <LoaderIcon className="animate-spin" />
-              )}
+              {isSubmitting && <LoaderIcon className="animate-spin" />}
               Salvar
             </Button>
           </div>

@@ -1,5 +1,5 @@
 export const taskMutationKeys = {
-  add: () => ["add-tasks"],
+  add: () => ["add-task"],
   update: (taskId) => ["update-task", taskId],
   delete: (taskId) => ["delete-task", taskId],
 }

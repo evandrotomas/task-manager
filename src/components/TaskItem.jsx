@@ -8,30 +8,32 @@ import { useDeleteTask } from "../hooks/data/use-delete-task"
 import { useUpdateTask } from "../hooks/data/use-update-task"
 
 const TaskItem = ({ task }) => {
-  const { mutate: deleteTask, isPending: deleteTaskIsloading } = useDeleteTask(
-    task.id,
+  const { mutate: deleteTask, isPending: deleteTaskIsLoading } = useDeleteTask(
+    task.id
   )
   const { mutate } = useUpdateTask(task.id)
 
   const getStatusClasses = () => {
     if (task.status === "done") {
-      return "bg-brand-primary  text-brand-primary"
+      return "bg-brand-primary text-brand-primary"
     }
+
     if (task.status === "in_progress") {
       return "bg-brand-process text-brand-process"
     }
+
     if (task.status === "not_started") {
       return "bg-brand-dark-blue bg-opacity-5 text-brand-dark-blue"
     }
   }
 
-  const handleDeleteClick = async () => {
+  const handleDeleteClick = () => {
     deleteTask(undefined, {
       onSuccess: () => {
-        toast.success("Tarefa deletada com sucesso!")
+        toast.success("Tarefa excluída com sucesso!")
       },
       onError: () => {
-        toast.error("Erro ao deletar tarefa!")
+        toast.error("Erro ao excluir tarefa. Por favor, tente novamente.")
       },
     })
   }
@@ -56,17 +58,15 @@ const TaskItem = ({ task }) => {
           toast.success("Status da tarefa atualizado com sucesso!"),
         onError: () =>
           toast.error(
-            "Erro ao atualizar status da tarefa. Por favor, tente novamente",
+            "Erro ao atualizar status da tarefa. Por favor, tente novamente."
           ),
-      },
+      }
     )
   }
 
-  console.log(handleCheckboxClick)
-
   return (
     <div
-      className={`flex items-center justify-between gap-2 rounded-lg bg-opacity-10 px-4 py-3 transition ${getStatusClasses()}`}
+      className={`flex items-center justify-between gap-2 rounded-lg bg-opacity-10 px-4 py-3 text-sm transition ${getStatusClasses()}`}
     >
       <div className="flex items-center gap-2">
         <label
@@ -74,8 +74,8 @@ const TaskItem = ({ task }) => {
         >
           <input
             type="checkbox"
-            // checked={task.status === "done"}
-            className="absolute h-full cursor-pointer opacity-0"
+            checked={task.status === "done"}
+            className="absolute h-full w-full cursor-pointer opacity-0"
             onChange={handleCheckboxClick}
           />
           {task.status === "done" && <CheckIcon />}
@@ -88,18 +88,18 @@ const TaskItem = ({ task }) => {
       </div>
 
       <div className="flex items-center gap-2">
-        {" "}
         <Button
           color="ghost"
           onClick={handleDeleteClick}
-          disabled={deleteTaskIsloading}
+          disabled={deleteTaskIsLoading}
         >
-          {deleteTaskIsloading ? (
-            <LoaderIcon className="animate-spin" />
+          {deleteTaskIsLoading ? (
+            <LoaderIcon className="animate-spin text-brand-text-gray" />
           ) : (
             <TrashIcon className="text-brand-text-gray" />
           )}
         </Button>
+
         <Link to={`/task/${task.id}`}>
           <DetailsIcon />
         </Link>
@@ -114,9 +114,8 @@ TaskItem.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     time: PropTypes.oneOf(["morning", "afternoon", "evening"]).isRequired,
-    status: PropTypes.oneOf(["done", "in_progress", "not_started"]).isRequired,
+    status: PropTypes.oneOf(["not_started", "in_progress", "done"]).isRequired,
   }).isRequired,
-
   handleCheckboxClick: PropTypes.func.isRequired,
   handleDeleteClick: PropTypes.func.isRequired,
 }

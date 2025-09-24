@@ -13,7 +13,6 @@ const Input = forwardRef(({ label, errorMessage, ...rest }, ref) => {
         ref={ref}
         {...rest}
       />
-
       {errorMessage && <InputErrorMessage>{errorMessage}</InputErrorMessage>}
     </div>
   )
@@ -21,10 +20,10 @@ const Input = forwardRef(({ label, errorMessage, ...rest }, ref) => {
 
 Input.displayName = "Input"
 Input.propTypes = {
+  id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   errorMessage: PropTypes.string,
   placeholder: PropTypes.string,
-  id: PropTypes.string.isRequired,
 }
 
 export default Input

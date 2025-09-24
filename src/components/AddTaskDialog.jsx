@@ -9,14 +9,13 @@ import { toast } from "sonner"
 import { v4 } from "uuid"
 
 import { LoaderIcon } from "../assets/icons"
-import Button from "../components/Button"
 import { useAddTask } from "../hooks/data/use-add-task"
+import Button from "./Button"
 import Input from "./Input"
 import TimeSelect from "./TimeSelect"
 
 const AddTaskDialog = ({ isOpen, handleClose }) => {
   const { mutate: addTask } = useAddTask()
-
   const {
     register,
     formState: { errors, isSubmitting },
@@ -29,29 +28,32 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
       description: "",
     },
   })
-
   const nodeRef = useRef()
 
   const handleSaveClick = async (data) => {
-    const task = {
-      id: v4(),
-      title: data.title.trim(),
-      time: data.time.trim(),
-      description: data.description.trim(),
-      status: "not_started",
-    }
-    addTask(task, {
-      onSuccess: () => {
-        handleClose()
-        reset({
-          title: "",
-          time: "morning",
-          description: "",
-        })
-        toast.success("Tarefa adicionada com sucesso!")
+    addTask(
+      {
+        id: v4(),
+        title: data.title.trim(),
+        time: data.time,
+        description: data.description.trim(),
+        status: "not_started",
       },
-      onError: () => toast.error("Error ao adicionar tarefa"),
-    })
+      {
+        onSuccess: () => {
+          handleClose()
+          reset({
+            title: "",
+            time: "morning",
+            description: "",
+          })
+          toast.success("Tarefa adicionada com sucesso!")
+        },
+        onError: () => {
+          toast.error("Erro ao adicionar tarefa. Por favor, tente novamente.")
+        },
+      }
+    )
   }
 
   const handleCancelClick = () => {
@@ -72,7 +74,6 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
       unmountOnExit
     >
       <div>
-        {" "}
         {createPortal(
           <div
             ref={nodeRef}
@@ -83,7 +84,7 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
               <h2 className="text-xl font-semibold text-brand-dark-blue">
                 Nova Tarefa
               </h2>
-              <p className="mb-4 mt-1 text-brand-text-gray">
+              <p className="mb-4 mt-1 text-sm text-brand-text-gray">
                 Insira as informações abaixo
               </p>
 
@@ -107,13 +108,13 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
                     },
                   })}
                 />
+
                 <TimeSelect
-                  errorMessage={errors?.time?.message}
                   disabled={isSubmitting}
-                  {...register("time", {
-                    required: true,
-                  })}
+                  errorMessage={errors?.time?.message}
+                  {...register("time", { required: true })}
                 />
+
                 <Input
                   id="description"
                   label="Descrição"
@@ -130,22 +131,22 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
                     },
                   })}
                 />
+
                 <div className="flex gap-3">
                   <Button
-                    onClick={handleCancelClick}
                     size="large"
                     className="w-full"
                     color="secondary"
+                    onClick={handleCancelClick}
                     type="button"
                   >
                     Cancelar
                   </Button>
-
                   <Button
                     size="large"
                     className="w-full"
-                    type="submit"
                     disabled={isSubmitting}
+                    type="submit"
                   >
                     {isSubmitting && <LoaderIcon className="animate-spin" />}
                     Salvar
@@ -154,14 +155,14 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
               </form>
             </div>
           </div>,
-          document.body,
+          document.body
         )}
       </div>
     </CSSTransition>
   )
 }
 
-AddTaskDialog.proptypes = {
+AddTaskDialog.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,

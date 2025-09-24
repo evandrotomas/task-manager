@@ -5,35 +5,35 @@ import DashboardCard from "./DashboardCard"
 const DashboardCards = () => {
   const { data: tasks } = useGetTasks()
 
+  const notStartedTasks = tasks?.filter(
+    (task) => task.status === "not_started"
+  ).length
   const inProgressTasks = tasks?.filter(
-    (task) => task.status === "in_progress",
+    (task) => task.status === "in_progress"
   ).length
   const completedTasks = tasks?.filter((task) => task.status === "done").length
-  const notStartedTasks = tasks?.filter(
-    (task) => task.status === "not_started",
-  ).length
 
   return (
     <div className="grid grid-cols-4 gap-9">
       <DashboardCard
         icon={<Tasks2Icon />}
         mainText={tasks?.length}
-        secondaryText={"Total de tarefas"}
+        secondaryText="Tarefas totais"
       />
       <DashboardCard
         icon={<LoaderIcon />}
         mainText={notStartedTasks}
-        secondaryText={"Tarefas não iniciadas"}
+        secondaryText="Tarefas não iniciadas"
       />
       <DashboardCard
-        icon={<LoaderIcon className="animate-spin" />}
+        icon={<LoaderIcon />}
         mainText={inProgressTasks}
-        secondaryText={"Tarefas em andamento"}
+        secondaryText="Tarefas em andamento"
       />
       <DashboardCard
         icon={<TasksIcon />}
         mainText={completedTasks}
-        secondaryText={"Tarefas concluídas"}
+        secondaryText="Tarefas concluídas"
       />
     </div>
   )

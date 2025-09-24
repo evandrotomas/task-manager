@@ -14,7 +14,7 @@ export const useDeleteTask = (taskId) => {
     },
     onSuccess: () => {
       queryClient.setQueryData(taskQueryKeys.getAll(), (oldTasks) => {
-        return oldTasks.filter((task) => task.id != taskId)
+        return oldTasks.filter((task) => task.id !== taskId)
       })
     },
   })

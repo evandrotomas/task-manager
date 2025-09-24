@@ -10,7 +10,7 @@ const Sidebar = () => {
         </h1>
         <p>
           Um simples{" "}
-          <span className="text-brand-primary">organizador de tarefas</span>
+          <span className="text-brand-primary">organizador de tarefas</span>.
         </p>
       </div>
 
@@ -19,9 +19,9 @@ const Sidebar = () => {
           <HomeIcon />
           Início
         </SidebarButton>
-
         <SidebarButton to="/tasks">
-          <TasksIcon /> Minha Tarefas
+          <TasksIcon />
+          Minhas Tarefas
         </SidebarButton>
       </div>
     </div>
