@@ -55,7 +55,7 @@ const TaskItem = ({ task }) => {
       },
       {
         onSuccess: () =>
-          toast.success("Status da tarefa atualizado com sucesso!"),
+          toast.success("Status da tarefa atualizada com sucesso!"),
         onError: () =>
           toast.error(
             "Erro ao atualizar status da tarefa. Por favor, tente novamente."
